@@ -1,4 +1,4 @@
-package ua.nure.blockchainservice.core.model;
+package ua.nure.blockchainservice.model;
 
 import sun.security.provider.DSAPublicKeyImpl;
 
