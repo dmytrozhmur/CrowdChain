@@ -1,6 +1,7 @@
 package ua.nure.blockchainservice.thread;
 
 import ua.nure.blockchainservice.model.Block;
+import ua.nure.blockchainservice.service.BlockchainData;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

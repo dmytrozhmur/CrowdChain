@@ -1,11 +1,12 @@
 package ua.nure.blockchainservice.model;
 
-import sun.security.provider.DSAPublicKeyImpl;
+//import sun.security.provider.DSAPublicKeyImpl;
 
 import java.io.Serializable;
-import java.security.InvalidKeyException;
-import java.security.Signature;
-import java.security.SignatureException;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Base64;
@@ -49,8 +50,8 @@ public class Transaction implements Serializable {
         this.signatureFX = encoder.encodeToString(this.signature);
     }
 
-    public Boolean isVerified(Signature signing) throws InvalidKeyException, SignatureException {
-        signing.initVerify(new DSAPublicKeyImpl(this.from));
+    public Boolean isVerified(Signature signing) throws InvalidKeyException, SignatureException, NoSuchAlgorithmException, InvalidKeySpecException {
+        signing.initVerify(KeyFactory.getInstance("DSA").generatePublic(new X509EncodedKeySpec(this.from)));
         signing.update(this.toString().getBytes());
         return signing.verify(this.signature);
     }

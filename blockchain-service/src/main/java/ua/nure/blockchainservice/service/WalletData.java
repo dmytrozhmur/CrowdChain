@@ -2,10 +2,7 @@ package ua.nure.blockchainservice.service;
 
 import ua.nure.blockchainservice.model.Wallet;
 
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -25,7 +22,8 @@ public class WalletData {
 
     public void loadWallet() throws SQLException,
             NoSuchAlgorithmException, InvalidKeySpecException {
-        Connection walletConnection = DriverManager.getConnection("jdbc:sqlite:../db/wallet.db");
+        Connection walletConnection = DriverManager
+                .getConnection("jdbc:sqlite:src/main/resources/ua/nure/blockchainservice/db/wallet.db");
         Statement walletStatement = walletConnection.createStatement();
         ResultSet resultSet = walletStatement.executeQuery(" SELECT * FROM WALLET ");
         KeyFactory keyFactory = KeyFactory.getInstance("DSA");

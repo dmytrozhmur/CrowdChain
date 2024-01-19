@@ -8,4 +8,19 @@ module ua.nure.blockchainservice {
 
     opens ua.nure.blockchainservice to javafx.fxml;
     exports ua.nure.blockchainservice;
+
+    opens ua.nure.blockchainservice.controller to javafx.fxml;
+    exports ua.nure.blockchainservice.controller;
+
+    opens ua.nure.blockchainservice.db.util to javafx.fxml;
+    exports ua.nure.blockchainservice.db.util;
+
+    opens ua.nure.blockchainservice.model to javafx.fxml;
+    exports ua.nure.blockchainservice.model;
+
+    opens ua.nure.blockchainservice.service to javafx.fxml;
+    exports ua.nure.blockchainservice.service;
+
+    opens ua.nure.blockchainservice.thread to javafx.fxml;
+    exports ua.nure.blockchainservice.thread;
 }

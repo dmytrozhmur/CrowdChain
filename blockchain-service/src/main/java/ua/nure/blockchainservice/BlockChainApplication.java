@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import ua.nure.blockchainservice.db.util.BlockchainHandler;
 import ua.nure.blockchainservice.db.util.WalletHandler;
+import ua.nure.blockchainservice.service.BlockchainData;
+import ua.nure.blockchainservice.service.WalletData;
 import ua.nure.blockchainservice.thread.MiningThread;
 import ua.nure.blockchainservice.thread.PeerClient;
 import ua.nure.blockchainservice.thread.PeerServer;

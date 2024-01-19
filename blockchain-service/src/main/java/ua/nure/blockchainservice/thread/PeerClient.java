@@ -1,6 +1,7 @@
 package ua.nure.blockchainservice.thread;
 
 import ua.nure.blockchainservice.model.Block;
+import ua.nure.blockchainservice.service.BlockchainData;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -37,15 +38,19 @@ public class PeerClient extends Thread {
                         returnedBlockchain.getLast().getLedgerId(),
                         returnedBlockchain.getLast().getTransactionLedger().size());
                 BlockchainData.getInstance().getBlockchainConsensus(returnedBlockchain);
-                Thread.sleep(2000);
             } catch (SocketTimeoutException ste) {
                 System.out.println("The socket timed out");
             } catch (IOException ioe) {
                 System.out.printf("Client Error: %s -- Error on port: %d\n",
                         ioe.getMessage(), queue.peek());
-            } catch (InterruptedException | ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } finally {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 queue.add(queue.poll());
             }
         }

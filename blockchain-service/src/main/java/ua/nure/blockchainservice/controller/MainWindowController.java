@@ -7,6 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import ua.nure.blockchainservice.BlockChainApplication;
+import ua.nure.blockchainservice.model.Transaction;
+import ua.nure.blockchainservice.service.BlockchainData;
+import ua.nure.blockchainservice.service.WalletData;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -33,7 +37,7 @@ public class MainWindowController {
     private TableColumn<?, ?> signature;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<Transaction> tableView;
 
     @FXML
     private TableColumn<?, ?> timestamp;
@@ -45,7 +49,7 @@ public class MainWindowController {
         Base64.Encoder encoder = Base64.getEncoder();
         from.setCellValueFactory(
                 new PropertyValueFactory<>("fromFX"));
-        to.setCellValueFactory(
+        o.setCellValueFactory(
                 new PropertyValueFactory<>("toFX"));
         value.setCellValueFactory(
                 new PropertyValueFactory<>("value"));
@@ -53,9 +57,9 @@ public class MainWindowController {
                 new PropertyValueFactory<>("signatureFX"));
         timestamp.setCellValueFactory(
                 new PropertyValueFactory<>("timestamp"));
-        coins.setText(BlockchainData.getInstance().getWalletBallanceFX());
+        coins.setText(BlockchainData.getInstance().getWalletBalanceFX());
         publicKey.setText(encoder.encodeToString(WalletData.getInstance().getWallet().getPublicKey().getEncoded()));
-        tableView.setItems(BlockchainData.getInstance().getTransactionLedgerFX());
+        tableView.setItems(BlockchainData.getInstance().getNewBlockTransactionLedgerFX());
         tableView.getSelectionModel().select(0);
     }
 
@@ -67,9 +71,9 @@ public class MainWindowController {
 
     @FXML
     void refresh(ActionEvent event) {
-        tableView.setItems(BlockchainData.getInstance().getTransactionLedgerFX());
+        tableView.setItems(BlockchainData.getInstance().getNewBlockTransactionLedgerFX());
         tableView.getSelectionModel().select(0);
-        coins.setText(BlockchainData.getInstance().getWalletBallanceFX());
+        coins.setText(BlockchainData.getInstance().getWalletBalanceFX());
     }
 
     @FXML
@@ -77,7 +81,7 @@ public class MainWindowController {
         Dialog<ButtonType> newTransactionController = new Dialog<>();
         newTransactionController.initOwner(borderPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("ua/nure/blockchainservice/AddNewTransactionWindow.fxml"));
+        fxmlLoader.setLocation(BlockChainApplication.class.getResource("AddNewTransactionWindow.fxml"));
         try {
             newTransactionController.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
@@ -88,8 +92,8 @@ public class MainWindowController {
         newTransactionController.getDialogPane().getButtonTypes().add(ButtonType.FINISH);
         Optional<ButtonType> result = newTransactionController.showAndWait();
         if (result.isPresent()) {
-            tableView.setItems(BlockchainData.getInstance().getTransactionLedgerFX());
-            coins.setText(BlockchainData.getInstance().getWalletBallanceFX());
+            tableView.setItems(BlockchainData.getInstance().getNewBlockTransactionLedgerFX());
+            coins.setText(BlockchainData.getInstance().getWalletBalanceFX());
         }
     }
 

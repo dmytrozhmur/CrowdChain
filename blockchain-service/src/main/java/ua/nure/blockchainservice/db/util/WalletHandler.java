@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class WalletHandler extends DatabaseHandler {
 
     public WalletHandler() throws SQLException {
-        super("jdbc:sqlite:../db/wallet.db");
+        super("jdbc:sqlite:src/main/resources/ua/nure/blockchainservice/db/wallet.db");
     }
 
     @Override
@@ -25,9 +25,9 @@ public class WalletHandler extends DatabaseHandler {
             byte[] pubBlob = wallet.getPublicKey().getEncoded();
             byte[] prvBlob = wallet.getPrivateKey().getEncoded();
             PreparedStatement insertStatement = connection
-                    .prepareStatement(" INSERT INTO WALLET(PUBLIC_KEY, PRIVATE_KEY) " + "VALUES (?, ?) ");
-            insertStatement.setBytes(1, prvBlob);
-            insertStatement.setBytes(2, pubBlob);
+                    .prepareStatement(" INSERT INTO WALLET(PUBLIC_KEY, PRIVATE_KEY) VALUES (?, ?) ");
+            insertStatement.setBytes(1, pubBlob);
+            insertStatement.setBytes(2, prvBlob);
             insertStatement.executeUpdate();
         }
     }

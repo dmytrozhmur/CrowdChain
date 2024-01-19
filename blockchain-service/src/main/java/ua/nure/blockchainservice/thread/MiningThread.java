@@ -1,5 +1,7 @@
 package ua.nure.blockchainservice.thread;
 
+import ua.nure.blockchainservice.service.BlockchainData;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -8,7 +10,7 @@ public class MiningThread extends Thread {
     public void run() {
         while (true) {
             long lastMinedBlock = LocalDateTime.parse(
-                    BlockhainData.getInstance()
+                    BlockchainData.getInstance()
                             .getCurrentBlockChain().getLast()
                             .getTimeStamp()
                     ).toEpochSecond(ZoneOffset.UTC);
@@ -21,12 +23,12 @@ public class MiningThread extends Thread {
                         ((lastMinedBlock + BlockchainData.getMiningInterval()) - now));
             } else {
                 System.out.println("MINING NEW BLOCK");
-                BlockchainData.getInstance.mineBlock();
-                System.out.println(BlockchainData.getInstance().getWalletBallanceFX());
+                BlockchainData.getInstance().mineBlock();
+                System.out.println(BlockchainData.getInstance().getWalletBalanceFX());
             }
 
             System.out.println(LocalDateTime.parse(BlockchainData.getInstance()
-                    .getCurrentBlockchain().getLast().getTimeStamp().toEpochSecond(ZoneOffset.UTC)));
+                    .getCurrentBlockChain().getLast().getTimeStamp()).toEpochSecond(ZoneOffset.UTC));
             try {
                 Thread.sleep(2000);
                 if (BlockchainData.getInstance().isExit()) {

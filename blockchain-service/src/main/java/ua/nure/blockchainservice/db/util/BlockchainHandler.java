@@ -2,31 +2,30 @@ package ua.nure.blockchainservice.db.util;
 
 import ua.nure.blockchainservice.model.Block;
 import ua.nure.blockchainservice.model.Transaction;
+import ua.nure.blockchainservice.service.BlockchainData;
+import ua.nure.blockchainservice.service.WalletData;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.Signature;
-import java.security.SignatureException;
+import java.security.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class BlockchainHandler extends DatabaseHandler {
     public BlockchainHandler() throws SQLException {
-        super("jdbc:sqlite:../db/blockchain.db");
+        super("jdbc:sqlite:src/main/resources/ua/nure/blockchainservice/db/blockchain.db");
     }
 
     @Override
-    public void initDatabase() throws SQLException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    public void initDatabase() throws SQLException, GeneralSecurityException {
         createBlockchainTable();
         resultSet = statement.executeQuery(" SELECT * FROM BLOCKCHAIN ");
         Transaction initBlockRewardTransaction = getInitBlockRewardTransaction();
 
         createTransactionTable();
-        if (initBlockRewardTransaction != null) {
-            BlockchainData.getInstance().addTransaction(initBlockRewardTransaction, true);
-            BlockchainData.getInstance().addTransactionState(initBlockRewardTransaction);
-        }
+//        if (initBlockRewardTransaction != null) {
+//            BlockchainData.getInstance().addTransaction(initBlockRewardTransaction, true);
+//            BlockchainData.getInstance().addTransactionState(initBlockRewardTransaction);
+//        }
     }
 
     private void createTransactionTable() throws SQLException {

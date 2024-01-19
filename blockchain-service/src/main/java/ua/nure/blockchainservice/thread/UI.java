@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ua.nure.blockchainservice.BlockChainApplication;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class UI extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../MainWindow.fxml"));
+            root = FXMLLoader.load(BlockChainApplication.class.getResource("MainWindow.fxml"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
