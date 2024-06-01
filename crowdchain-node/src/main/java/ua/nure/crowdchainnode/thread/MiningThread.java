@@ -35,6 +35,12 @@ public class MiningThread extends Thread {
                             minedBlock.getTransactionLedger().stream()
                                     .mapToDouble(Transaction::getAmount).sum());
                 }
+            } else {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

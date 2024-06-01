@@ -27,15 +27,15 @@ public class RequestHandler {
         instance = new RequestHandler();
     }
 
-    private RequestHandler() {
-        if (nodeRepository.findAll().isEmpty()) {
-            fetchNodes();
-            notifyNodes(new Block());
-        }
-    }
+    private RequestHandler() {}
 
     public static RequestHandler getInstance() {
         return instance;
+    }
+
+    public static void init() {
+        instance.fetchNodes();
+        instance.notifyNodes(new Block());
     }
 
     public void notifyNodes(Block minedBlock) {
@@ -97,7 +97,7 @@ public class RequestHandler {
             connection.disconnect();
             return transactions;
         } catch (URISyntaxException | IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Problem with fetching transactions pool: " + e.getMessage());
         }
         return new ArrayList<>();
     }

@@ -20,15 +20,15 @@ public class CrowdchainNodeApplication extends Application {
     @Override
     public void init() {
         initDatabase();
-        initRequestHandler();
         startThreads();
+        //initRequestHandler();
     }
 
     private void initRequestHandler() {
         while (NodeRepository.getInstance().findAll().isEmpty()) {
-            RequestHandler.getInstance();
+            RequestHandler.init();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -56,9 +56,9 @@ public class CrowdchainNodeApplication extends Application {
     }
 
     private void startThreads() {
+        BlockchainServerWrapper.getInstance().start();
         new PeerServer(6000).start();
         new MiningThread().start();
-        BlockchainServerWrapper.getInstance().start();
     }
 
     public static void main(String[] args) {
