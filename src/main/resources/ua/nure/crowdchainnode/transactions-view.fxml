@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ua.nure.crowdchainnode.controller.TransactionsViewController"
+      spacing="10">
+
+    <Pagination fx:id="blockPagination" />
+
+    <TableView fx:id="transactionsTable">
+        <columns>
+            <TableColumn fx:id="timestampColumn" text="Timestamp" />
+            <TableColumn fx:id="amountColumn" text="Amount" />
+            <TableColumn fx:id="senderColumn" text="Sender" />
+            <TableColumn fx:id="recipientColumn" text="Recipient" />
+            <TableColumn fx:id="typeColumn" text="Type" />
+        </columns>
+    </TableView>
+
+</VBox>
