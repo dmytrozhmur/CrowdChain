@@ -1,0 +1,57 @@
+/* src/app/project-detail/project-detail.component.css */
+:host {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  margin: 0 auto;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #3f51b5;
+  margin-bottom: 0.5em;
+}
+
+p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 24px;
+}
+
+p strong {
+  font-weight: bold;
+  color: #000;
+}
+
+mat-progress-bar {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.button-text {
+  font-size: 24px;
+}

@@ -1,0 +1,9 @@
+.main-container {
+  height: 100vh;
+}
+
+.nav-container {
+  /*border: 1px solid magenta;*/
+  border-radius: 5px;
+  background-color: darkmagenta;
+}

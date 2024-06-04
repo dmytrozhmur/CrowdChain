@@ -1,0 +1,19 @@
+<!-- src/app/project-detail/project-detail.component.html -->
+<div *ngIf="project" class="column-container">
+  <h2>{{ project.title }}</h2>
+  <p>{{ project.description }}</p>
+  <p>{{ project.status }}</p>
+  <div class="row-container">
+    <p><strong>Collected:</strong> {{ project.fundedAmount }}</p>
+    <p><strong>Goal:</strong> {{ project.goalAmount }}</p>
+  </div>
+  <mat-progress-bar mode="determinate" [value]="(project.fundedAmount / project.goalAmount) * 100" color="accent"></mat-progress-bar>
+  <button mat-flat-button color="accent">
+    <a [routerLink]="['/projects', project.id, 'donate']">
+      <div class="row-container">
+        <mat-icon>attach_money</mat-icon>
+        <div class="button-text">Donate</div>
+      </div>
+    </a>
+  </button>
+</div>

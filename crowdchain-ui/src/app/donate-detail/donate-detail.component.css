@@ -1,0 +1,39 @@
+mat-slider {
+  width: 100%;
+}
+
+.payment-form {
+  max-width: 500px;
+  margin: auto;
+  height: 50vh;
+}
+
+.payment-input {
+  width: 100%;
+}
+
+.margin {
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.right-align {
+  text-align: right;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.right-align {
+  -moz-appearance: textfield;
+}
+
+.input-metadata {
+  color: lightgray;
+}

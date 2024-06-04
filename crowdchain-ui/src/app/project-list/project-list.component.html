@@ -1,0 +1,12 @@
+<!-- src/app/project-list/project-list.component.html -->
+
+<div class="column-container">
+  <div class="row-container">
+    <div class="project-container" *ngFor="let project of projects">
+      <h2>{{ project.title }}</h2>
+      <p >{{ project.status }}</p>
+      <a [routerLink]="['/projects', project.id]">View Details</a>
+    </div>
+  </div>
+</div>
+

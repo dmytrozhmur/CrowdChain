@@ -1,0 +1,52 @@
+<!-- src/app/donate-detail/donate-detail.component.html -->
+<div class="payment-form" fxLayout="column" fxLayoutAlign="center">
+  <form
+    fxLayout="column"
+    fxLayoutGap="20px"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <mat-form-field class="payment-input">
+      <mat-label>Cardholder name</mat-label>
+      <input type="text" matInput ngModel name="name" required>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="payment-input">
+      <mat-label>Card number</mat-label>
+      <input type="text" matInput ngModel name="number" placeholder="1234123412341234" required pattern="^([0-9]{16})$" #numberInput="ngModel">
+      <mat-error *ngIf="!numberInput.hasError('required')">Card number should consist of 16 numbers</mat-error>
+      <mat-error *ngIf="numberInput.hasError('required')">Card number is required</mat-error>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px" class="payment-input">
+      <mat-form-field>
+        <mat-label>Expiry Date</mat-label>
+        <input type="text" matInput ngModel name="date" required pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$" #dateInput="ngModel">
+        <mat-error *ngIf="!dateInput.hasError('required')">Date format should be MM/YY</mat-error>
+        <mat-error *ngIf="dateInput.hasError('required')">Expiration date is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>CVV</mat-label>
+        <input type="password" matInput ngModel name="cvv" required pattern="^([0-9]{3})$" #cvvInput="ngModel">
+        <mat-error *ngIf="!cvvInput.hasError('required')">CVV must be 3 characters long</mat-error>
+        <mat-error *ngIf="cvvInput.hasError('required')">CVV is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="payment-input" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="1px">
+      <mat-form-field  floatLabel="always">
+        <input matInput type="double" ngModel name="amount" [(ngModel)]="amount" class="right-align" placeholder="10.00" >
+        <span matTextPrefix class="input-metadata">Amount</span>
+        <span matTextSuffix class="input-metadata">&nbsp;$&nbsp;</span>
+      </mat-form-field>
+      <mat-slider
+        class="margin"
+        [max]="10000"
+        [min]="10"
+        [step]="0.5"
+        [discrete]="formatLabel"
+      >
+        <input matSliderThumb ngModel name="amount" [(ngModel)]="amount" #slider>
+      </mat-slider>
+    </div>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Donate</button>
+  </form>
+</div>
